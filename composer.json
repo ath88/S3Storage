@@ -1,0 +1,49 @@
+{
+    "name": "freescout/s3storage",
+    "description": "",
+    "authors": [
+        {
+            "name": "FreeScout",
+            "email": "support@freescout.net"
+        }
+    ],
+    "require": {
+        "league/flysystem-aws-s3-v3": "^1.0"
+    },
+    "replace": {
+        "symfony/polyfill-php82": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-mbstring": "*",
+        "symfony/polyfill-ctype": "*",
+        "psr/http-message": "*",
+        "psr/http-factory": "*",
+        "psr/http-client": "*",
+        "league/mime-type-detection": "*",
+        "league/flysystem": "*",
+        "guzzlehttp/psr7": "*",
+        "guzzlehttp/promises": "*",
+        "guzzlehttp/guzzle": "*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\S3Storage\\Providers\\S3StorageServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        },
+        "aws/aws-sdk-php": ["S3"]
+    },
+    "scripts": {
+        "pre-autoload-dump": [
+            "Aws\\Script\\Composer\\Composer::removeUnusedServices",
+            "echo '.git .github test tests docs travis demo demos example examples todo license changelog* contributing* upgrading* upgrade* .idea .vagrant readme* _ide_helper.php *.dist *.md *.log *.txt *.pdf *.xls *.doc *.docx *.png *.gif *.bmp *.ico *.jpg *.jpeg *.otf *.eot *.svg *.ttf .php_cs* .scrutinizer .gitignore .gitattributes .editorconfig dockerfile phpcs.xml phpunit.xml build.xml package.xml package.json Makefile Doxyfile gulpfile.js bower.json karma.conf.js yarn.lock .babelrc package.js .htaccess CNAME LICENSE* .gitmodules composer.json composer.lock docs-*.json* examples-*.json* build .changes phpunit*.xml*' | xargs -n1 | xargs -I{} find vendor/aws/aws-sdk-php -iname '{}' -print0 | xargs -0 rm -rf"
+        ]
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\S3Storage\\": ""
+        }
+    }
+}

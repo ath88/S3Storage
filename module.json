@@ -1,0 +1,25 @@
+{
+    "name": "S3 Storage",
+    "alias": "s3storage",
+    "description": "Enable AWS S3 storage to store attachments, profile photos and uploads!",
+    "version": "1.0.0",
+    "detailsUrl": "https://freescout.net/module/s3-storage/",
+    "author": "FreeScout",
+    "authorUrl": "https://www.freescout.net",
+    "requiredAppVersion": "1.8.241",
+    "license": "AGPL-3.0",
+    "keywords": [],
+    "active": 0,
+    "order": 0,
+    "providers": [
+        "Modules\\S3Storage\\Providers\\S3StorageServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": [],
+    "latestVersionUrl": "https://raw.githubusercontent.com/freescout-help-desk/S3Storage/refs/heads/dist/module.json",
+    "latestVersionZipUrl": "https://github.com/freescout-help-desk/S3Storage/archive/refs/heads/dist.zip",
+    "changelogUrl": "https://freescout.net/module/s3-storage/?changelog=1"
+}
