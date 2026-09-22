@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Factory;
 // Module alias.
 define('S3_MODULE', 's3storage');
 
+require_once __DIR__.'/../vendor/autoload.php';
+
 class S3StorageServiceProvider extends ServiceProvider
 {
     /**
