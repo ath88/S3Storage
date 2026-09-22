@@ -38,8 +38,11 @@ class S3StorageServiceProvider extends ServiceProvider
      */
     public function hooks()
     {
-        // Section settings
         \Eventy::addFilter('email.reply_to_customer.attach', function($attached, $message, $attachment, $thread_id) {
+
+            if (\Helper::isLocalStorage()) {
+                return $attached;
+            }
 
             if ($attached) {
                 return $attached;
@@ -73,6 +76,30 @@ class S3StorageServiceProvider extends ServiceProvider
             });
 
             return true;
+        }, 20, 4);
+
+        // User photos are stored first in the local storage and after that uploaded to S3.
+        \Eventy::addFilter('user.save_photo', function($file_name, $user, $local_path, $storage_path) {
+            if (\Helper::isLocalStorage()) {
+                return $file_name;
+            }
+
+            // Upload photo to S3.
+            try {
+                $stream = fopen($local_path, 'r');
+                if ($stream) {
+                    \Storage::put($storage_path, fopen($local_path, 'r'));
+                    fclose($stream);
+                } else {
+                    \Log::error('[S3 Storage] Could not open user photo for uploading to S3: '.$local_path);
+                    return false;
+                }
+            } catch (\Exception $e) {
+                \Log::error('[S3 Storage] Could not open user photo '.$local_path.' for uploading to S3: '.$e->getMessage());
+                return false;
+            }
+
+            return $file_name;
         }, 20, 4);
     }
 
